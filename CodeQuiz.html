@@ -6,45 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CodeQuizQuestions</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="./assets/Css/game.css">
     <link rel="stylesheet" href="./assets/Css/style.css">
-    <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
-    <a class="btn btn-secondary btn-lg" href="HighScore.html" role="button">View High Scores</a>
-    <div class="Timer-display">Time Remaining: <span id="time">05:00</span></div>
-    <div id="quizContainer" class="container">
-        <div class="jumbotron">
-            <h3 id="question" class="display-4" class="question"></h3>
-            <hr class="my-4">
-            <p class="lead">
-                <button class="btn btn-primary btn-lg btn-block" class="option">
-                    <input type="radio" name="option" value="1" /> <span id="opt1"></span> </button>
-
-                <button class="btn btn-primary btn-lg btn-block" class="option">
-                    <input type="radio" name="option" value="2" /> <span id="opt2"></span> </button>
-
-                <button class="btn btn-primary btn-lg btn-block" class="option">
-                    <input type="radio" name="option" value="3" /> <span id="opt3"></span> </button>
-                <button class="btn btn-primary btn-lg btn-block" class="option">
-                    <input type="radio" name="option" value="4" /> <span id="opt4"></span> </button>
-
-                <br>
-                <button id="nextButton" class="next-btn" onclick="loadNextQuestion();">Submit</button>
-            </p>
+    <div class="container">
+        <div id="game" class="justify-center flex-column">
+            <div id="hud">
+                <div id="hud-item">
+                    <p class="hud-prefix">
+                        Question
+                    </p>
+                    <h1 class="hud-main-text" id="questionCounter">
+                        
+                    </h1>
+                </div>
+            </div>
+            <div id="hud">
+                <div id="hud-item">
+                    <p class="hud-prefix">
+                        Score
+                    </p>
+                    <h1 class="hud-main-text" id="score">
+                        0
+                    </h1>
+                </div>
+            </div>
+            <h2 id="question">What is the answer to this question?</h2>
+            <div class="choice-container">
+               <p class="choice-prefix">A</p>
+               <p class="choice-text"  data-number="1">Choice 1</p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-prefix">B</p>
+                <p class="choice-text" data-number="2">Choice 2</p>
+             </div>
+             <div class="choice-container">
+                <p class="choice-prefix">C</p>
+                <p class="choice-text" data-number="3">Choice 3</p>
+             </div>
+             <div class="choice-container">
+                <p class="choice-prefix">D</p>
+                <p class="choice-text" data-number="4">Choice 4</p>
+             </div>
         </div>
     </div>
-   
-    <div id="result" class="container jumbotron display-4 result btn btn-primary btn-lg btn-block "
-        style="display: none; background-color: #007bff; color: cornsilk;" onclick="scoreboard();">
-        
-   </div>
 
 
-
-    <script src="question.js"></script>
-    <script src="quiz-script.js"></script>
+    
+    <script src="./assets/JS/quiz-script.js"></script>
 </body>
 
 </html>

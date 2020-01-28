@@ -1,162 +1,129 @@
-// Timer functionality
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        //var selectedOption = document.querySelector('input[type=radio]:checked');
-        //console.log(timer);
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-        display.textContent = minutes + ":" + seconds;
-        // console.log(seconds);
-        //console.log(timer);
-        // This doesnt work because selectedOption is not defined yet
-        //  if(selectedOption.checked = false) {
-        //     timer = duration - 30;
-        //     minutes = parseInt(timer / 60, 10);
-        //     seconds = parseInt(timer % 60, 10);
-
-        //     minutes = minutes < 10 ? "0" + minutes : minutes;
-        //     seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        //     display.textContent = minutes + ":" + seconds;
-
-
-        //  }
+var question = document.getElementById("question");
+var choices = Array.from(document.getElementsByClassName("choice-text"));
+var questionCounterText =document.getElementById("questionCounter");
+var scoreText= document.getElementById("score");
 
 
 
 
-        if (--timer < 0) {
-            minutes = 00;
-            seconds = 00;
-            display.textContent = minutes + ":" + seconds;
-            container.style.display = "none";
-            resultCont.style.display = "";
-            resultCont.textContent = "Time is up!"
-            resultCont.textContent = "Your Score: " + score + "/50";
-
-        }
-
-
-    }, 1000);
-}
-window.onload = function () {
-    var fiveMinutes = 60 * 5,
-        display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
-
-};
-// Question functionality
-var initials;
-var records = [];
-var currentQuestion = 0;
+var currentQuestion = {};
+var acceptingAnswers = false;
 var score = 0;
-var totQuestions = questions.length;
-var container = document.getElementById('quizContainer');
-var questionEl = document.getElementById('question');
-var opt1 = document.getElementById('opt1');
-var opt2 = document.getElementById('opt2');
-var opt3 = document.getElementById('opt3');
-var opt4 = document.getElementById('opt4');
-var nextButton = document.getElementById('nextButton');
-var resultCont = document.getElementById('result');
-function loadQuestion(questionIndex) {
-    var q = questions[questionIndex];
-    questionEl.textContent = (questionIndex + 1) + '. ' + q.question;
-    opt1.textContent = q.option1;
-    opt2.textContent = q.option2;
-    opt3.textContent = q.option3;
-    opt4.textContent = q.option4;
+var questionCounter = 0;
+var availableQuestions = [];
 
+var questions = [
+    {
+        question: "What does HTML stand for?" ,
+        choice1: "Highlight Tree Marking Land",
+        choice2: "Hyper Text Markup Language",
+        choice3: "High Text Markup Language",
+        choice4: "Hyper Text Motion Language",
+        answer: 2 
+    },
+    {
+        question: "What does Css Stand for?" ,
+        choice1: "Calling Style Sheet",
+        choice2: "Cascading Seeing Style",
+        choice3: "Casacading Style Sheet",
+        choice4: "Calling Seeing Sheet",
+        answer: 3 
+    },
+    {
+        question: "How do you 'Hello World' in a alert?" ,
+        choice1: "msg('Hello World');",
+        choice2: "msgBox('Hello World');",
+        choice3: "alert('Hello World');",
+        choice4: "alertText('Hello World');",
+        answer: 3 
+    },
+    {
+        question: "Which languages are the building block of the web?" ,
+        choice1: "HTML Only",
+        choice2: "CSS & Bootstrap",
+        choice3: "Javascript",
+        choice4: "All of the above",
+        answer: 4 
+    },
+    {
+        question: "What is Javascript?" ,
+        choice1: "Language that renders web page to become interactive",
+        choice2: "Language that styles the page",
+        choice3: "Language that is object-oriented",
+        choice4: "Language that does nothing",
+        answer: 1 
+    }
+];
+
+
+var correct_bonus = 20;
+var max_Question = 5;
+
+startGame = () => {
+    questionCounter = 0;
+    score =0;
+    availableQuestions = [...questions]
+    // console.log(availableQuestions);
+    getNewQuestion();
 };
-function loadNextQuestion() {
-    var selectedOption = document.querySelector('input[type=radio]:checked');
-    if (!selectedOption) {
-        alert("Please select your answer!");
-        return;
-    }
-    var answer = selectedOption.value;
-    if (questions[currentQuestion].answer == answer) {
-        score += 10;
-    }
-    // Does not add points to score if answer is wrong
-    selectedOption.checked = false;
+getNewQuestion = () => {
 
+  if (availableQuestions.length === 0|| questionCounter >= max_Question ){
+    //   go tothe end
+    localStorage.setItem("mostRecentScore", score);
+    return window.location.assign("./end.html");
+  }
 
-    currentQuestion++;
-
-    if (currentQuestion == totQuestions - 1) {
-        nextButton.textContent = "Finish";
-        //nextButton.attr(href = "CodeQuizHighScores.html");
-    }
-    if (currentQuestion == totQuestions) {
-        container.style.display = "none";
-        resultCont.style.display = "";
-        display = document.querySelector('#time');
-        minutes = 00;
-        seconds = 00;
-        display.textContent = minutes + ":" + seconds;
-        //  var highscoreStyle = $("<div>");
-        //  highscoreStyle.addClass("jumbotron");
-        //  $("#display").append(highscoreStyle);
-        //  var jumboTxt = $("<h1>");
-        //  jumboTxt.addClass("display-4");
-        //  jumboTxt.text("High Scores");
-        //  $("#jumbotron").append(jumboTxt);
-        //  var instructTxt = $("<p>");
-        //  instructTxt.addClass("lead");
-        //  instructTxt.text("Click on the button to add your score!");
-        //  $("#jumbotron").append(instructTxt);
-        //  var newP = $("<p>");
-        //  newP.addClass("lead");
-        //  $("#instructTxt").append(newP);
-        //  var scoreBtn = $("<a>");
-        //  scoreBtn.addClass("btn btn-primary btn-lg");
-        //  scoreBtn.text("New Score");
-        //  $("#lead").append(scoreBtn)
-
-
-        resultCont.textContent = "Your Score: " + score + "/50";
+    questionCounter++;
+    questionCounterText.innerText = questionCounter + "/" + max_Question;
 
 
 
-        return;
-    }
-    loadQuestion(currentQuestion);
-}
-var scoreList = localStorage.getItem("records");
-loadQuestion(currentQuestion);
-function scoreboard() {
-    initials = prompt("Please enter your name.");
-    var scoreList = localStorage.getItem("records")
-    records = JSON.parse(scoreList);
-    if (initials) {
+
+    var questionIndex = Math.floor(Math.random() * availableQuestions.length);
+    currentQuestion = availableQuestions[questionIndex];
+    question.innerText = currentQuestion.question;
+
+    choices.forEach(choice => {
+        var number = choice.dataset["number"];
+        choice.innerText = currentQuestion["choice" + number];
+ 
+
+    });
+     availableQuestions.splice(questionIndex, 1);
+     acceptingAnswers = true;
+};
+
+choices.forEach(choice => {
+    choice.addEventListener("click", e => {
+        // console.log(e.target);
+        if(!acceptingAnswers) return;
+        acceptingAnswers = false;
+        var selectedChoice = e.target;
+        var selectedAnswer = selectedChoice.dataset["number"];
+        
+        var classToApply = 
+          selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+             
+          if(classToApply === "correct"){
+              incrementScore(correct_bonus);
+          }
 
 
-        var user = {
-            name: initials,
-            finalScore: score
-        }
-        // user.name = initials;
-        // user.finalScore = score;
-        records.push(user);
-        localStorage.setItem("records", JSON.stringify(records));
-        console.log(initials);
-        console.log(score);
-        console.log(records);
-        $("#result").empty();
-        for (var i = 0; i < records.length; i++) {
-            var newP = $("<p>");
-            newP.text(records[i].name + " : " + records[i].finalScore);
-            $("#result").prepend(newP);
-        }
+          selectedChoice.parentElement.classList.add(classToApply);
+          setTimeout( () => {
+            selectedChoice.parentElement.classList.remove(classToApply);
+            getNewQuestion();
 
-    }
-    else {
-        alert("Please enter initials!");
-        return;
-    }
+          },1000);
+         
 
-}
+
+    });
+});
+incrementScore = num => {
+    score += num;
+    scoreText.innerText = score;
+};
+
+startGame();
