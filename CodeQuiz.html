@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CodeQuizQuestions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+
+<body>
+    <a class="btn btn-secondary btn-lg" href="HighScore.html" role="button">View High Scores</a>
+    <div class="Timer-display">Time Remaining: <span id="time">05:00</span></div>
+    <div id="quizContainer" class="container">
+        <div class="jumbotron">
+            <h3 id="question" class="display-4" class="question"></h3>
+            <hr class="my-4">
+            <p class="lead">
+                <button class="btn btn-primary btn-lg btn-block" class="option">
+                    <input type="radio" name="option" value="1" /> <span id="opt1"></span> </button>
+
+                <button class="btn btn-primary btn-lg btn-block" class="option">
+                    <input type="radio" name="option" value="2" /> <span id="opt2"></span> </button>
+
+                <button class="btn btn-primary btn-lg btn-block" class="option">
+                    <input type="radio" name="option" value="3" /> <span id="opt3"></span> </button>
+                <button class="btn btn-primary btn-lg btn-block" class="option">
+                    <input type="radio" name="option" value="4" /> <span id="opt4"></span> </button>
+
+                <br>
+                <button id="nextButton" class="next-btn" onclick="loadNextQuestion();">Submit</button>
+            </p>
+        </div>
+    </div>
+   
+    <div id="result" class="container jumbotron display-4 result btn btn-primary btn-lg btn-block "
+        style="display: none; background-color: #007bff; color: cornsilk;" onclick="scoreboard();">
+        
+   </div>
+
+
+
+    <script src="question.js"></script>
+    <script src="quiz-script.js"></script>
+</body>
+
+</html>
