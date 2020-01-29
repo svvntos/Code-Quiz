@@ -61,19 +61,19 @@ var max_Question = 5;
 
 startGame = () => {
     questionCounter = 0;
-    score =0;
+    score = 0;
     availableQuestions = [...questions]
     // console.log(availableQuestions);
     getNewQuestion();
 };
 getNewQuestion = () => {
 
-  if (availableQuestions.length === 0|| questionCounter >= max_Question ){
+  if (availableQuestions.length === 0 || questionCounter >= max_Question ){
     //   go tothe end
     localStorage.setItem("mostRecentScore", score);
     return window.location.assign("./end.html");
   }
-
+ 
     questionCounter++;
     questionCounterText.innerText = questionCounter + "/" + max_Question;
 
@@ -122,7 +122,7 @@ choices.forEach(choice => {
     });
 });
 incrementScore = num => {
-    score += num;
+    score = score + num;
     scoreText.innerText = score;
 };
 
