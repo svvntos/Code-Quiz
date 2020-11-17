@@ -5,7 +5,7 @@ This is app is quiz to test your knownledge.
 
 App Specifications
 
-- User clicks start for the quiz to start.
+- User click starts for the quiz to start.
 - The quiz is timed.
 - Selecting the correct answer it displasy green and for incorrect is displays red.
 - Collects users highscore.
